@@ -5,13 +5,19 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 9px;
     
-  width: 75px;
+  width: 74px;
   height: 112px;
+
+  /* .loader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
 `;
 
 export const Date = styled.button`
   height: 75px;
-  width: 75px;
+  width: 74px;
   border: none;
   background: transparent;  
   color: white;
