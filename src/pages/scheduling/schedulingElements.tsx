@@ -49,3 +49,12 @@ export const Date = styled.div`
 export const Hour = styled.div`
   /* border: solid 1px pink; */
 `;
+
+export const Main = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  margin-top: 11px;
+`;
