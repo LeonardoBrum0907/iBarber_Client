@@ -4,5 +4,5 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 29px;
+  margin-top: 28px;
 `;

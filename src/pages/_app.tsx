@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app';
+import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { AvailabilitiesProvider } from '../availabilitiesContext';
@@ -13,10 +14,16 @@ const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }: AppProps) {
 
+  const [desactiveButton, setDesactiveButton] = useState(false);
+
+  function handleCloseButton() {
+    setDesactiveButton(false);
+}
+
   return (
     <QueryClientProvider client={queryClient}>
       <AvailabilitiesProvider>
-        <Component {...pageProps} />
+        <Component closeButton={handleCloseButton} isDesactive={desactiveButton} {...pageProps} />
 
         <GlobalStyle />
 

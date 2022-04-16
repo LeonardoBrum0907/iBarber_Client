@@ -17,7 +17,7 @@ export function makeServer() {
     factories: {
       availability: Factory.extend({
         month_day() {
-          return new Date(faker.date.recent(5)).toLocaleDateString('pt-BR', {
+          return new Date(faker.date.recent(20)).toLocaleDateString('pt-BR', {
             day: '2-digit',
           });
         },
