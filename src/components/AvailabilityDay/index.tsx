@@ -1,39 +1,33 @@
-import { useState } from "react";
-import { AvailabilitiesData } from "../../availabilitiesContext";
-import { Container, Date } from "./availabilityElements";
+import { Dispatch, SetStateAction } from "react";
+import { ListDayProps } from "../../pages/scheduling";
+import { useAvailability } from "../../useAvailability";
+import { DateItem, DateItemNumber, DateItemWeekDay } from "./availabilityElements";
 
 interface AvailabilityProps {
-  availability: AvailabilitiesData;
-  selected: string;
+  availability: ListDayProps;
+  selectedDay: number;
+  setSelectedDay: Dispatch<SetStateAction<number>>;
 }
 
-export function AvailabilityDay({availability, selected}: AvailabilityProps) {  
-  const [isActiveDay, setIsActiveDay] = useState(false)
-
-  function handleColorDay() {
-    setIsActiveDay((atual) => atual ? false : true)
-  }
+export function AvailabilityDay({availability, selectedDay, setSelectedDay}: AvailabilityProps) {
+  const {isLoading} = useAvailability();
 
   return (
-    <Container>      
-
-      <Date id="botao" onClick={() => {handleColorDay()}}>        
-        {selected === availability.id && isActiveDay?
-          <div className="active">
-            <p className="dayMonth">{availability.month_day}</p>
-            <p className="dayWeek">SEG</p>
-          </div>          
-
-        :
-
-          <div className="notActive">
-            <p className="dayMonth">{availability.month_day}</p>
-            <p className="dayWeek">SEG</p>
-          </div>
-        }
-      </Date>
-
-      {/* <Loader />     */}
-    </Container>
-  );
+    
+    <DateItem 
+      onClick={() => availability.status && setSelectedDay(availability.number)}
+      style={{
+        opacity: availability.status ? 1 : 0.3,
+        cursor: availability.status ? "pointer" : "no-drop",
+        background: availability.number === selectedDay ? '#6C63FF' : 'rgba(255, 255, 255, 0.3)',
+      }} 
+    >
+      <DateItemNumber
+        style={{
+          color: availability.number === selectedDay ? 'yellow' : 'white',
+        }}
+      >{availability.number}</DateItemNumber>
+      <DateItemWeekDay>{availability.weekday}</DateItemWeekDay>
+    </DateItem>
+);
 }

@@ -5,7 +5,7 @@ import { createServer, Factory, Model } from 'miragejs';
   id: number;
   month_day: string;
   // week_day_available: string;
-  hour: string;
+  hour: string[];
 }
 
 export function makeServer() {
@@ -17,21 +17,23 @@ export function makeServer() {
     factories: {
       availability: Factory.extend({
         month_day() {
-          return new Date(faker.date.recent(20)).toLocaleDateString('pt-BR', {
+          return new Date(faker.date.recent(90)).toLocaleDateString('pt-BR', {
             day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
           });
         },
         // week_day_available() {
         //   faker.date.weekday
         // },
         hour(i: number) {
-          return `Hour ${i + 1}`
+          return ['09:00', '14:00', '18:00', '19:00']
         }
       })
     },
 
     seeds(server) {
-      server.createList('availability', 4);
+      server.createList('availability', 100);
     },
 
     routes() {
